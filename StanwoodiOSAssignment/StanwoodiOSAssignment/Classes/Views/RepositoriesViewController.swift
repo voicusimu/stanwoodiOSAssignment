@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 enum StatusType {
     case Loading
@@ -35,19 +36,27 @@ class RepositoriesViewController: UIViewController {
     var isFiltering: Bool {
       return searchController.isActive && !isSearchBarEmpty
     }
-
+    var isInternetAvailable: Bool {
+        return NetworkReachabilityManager()!.isReachable
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         repositoriesPresenter.setViewDelegate(trendingRepositoriesDelegate: self)
-        repositoriesPresenter.showInitialRepositories(with: .LastDay)
         setupStatus(status: .Loading)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Repositories"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        if !isInternetAvailable {
+            setupStatus(status: .NoData)
+            presentOKAlert(title: "No connection", message: NSLocalizedString("No internet connection available", comment: ""))
+        } else {
+            repositoriesPresenter.showInitialRepositories(with: .LastDay)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +65,12 @@ class RepositoriesViewController: UIViewController {
     }
 
     @IBAction func didChangeSegmentedControl(_ sender: UISegmentedControl) {
+        searchController.isActive = false
+        if !isInternetAvailable {
+            setupStatus(status: .NoData)
+            presentOKAlert(title: "No connection", message: NSLocalizedString("No internet connection available", comment: ""))
+            return
+        }
         setupStatus(status: .Loading)
 
         switch sender.selectedSegmentIndex {
@@ -124,7 +139,11 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
 
     func didLoadInitialRepositories(repositories: [RepositoriesModel.RepoItem], hasError: Bool) {
         self.repositories = repositories
-        setupStatus(status: repositories.count > 0 ? .HasData : .NoData)
+        if hasError {
+            setupStatus(status: .Error)
+        } else {
+            setupStatus(status: repositories.count > 0 ? .HasData : .NoData)
+        }
         tableView.reloadData()
     }
 
@@ -198,14 +217,19 @@ extension RepositoriesViewController {
             statusLabel.isHidden = true
             tableView.isHidden = false
         case .Error:
-            let alert = UIAlertController(title: "Error", message: "An error has occured.\nProbably unauthenticated request limit reached", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "OK", style: .default) {_ in }
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true)
+            presentOKAlert(title: "Error", message: NSLocalizedString("An error has occured.\nProbably unauthenticated request limit reached", comment: ""))
+            activityIndicator.stopAnimating()
             statusLabel.isHidden = true
             tableView.isHidden = false
             break
         }
+    }
+
+    func presentOKAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "OK", style: .default) {_ in }
+        alert.addAction(dismissAction)
+        self.present(alert, animated: true)
     }
 
     func filterContentForSearchText(_ searchText: String) {

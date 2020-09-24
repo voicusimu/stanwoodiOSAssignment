@@ -93,7 +93,7 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, 
         }
         if isFiltering {
             let repoModel = filteredFavouriteRepositories[indexPathToRemove.row]
-            if let indexToRemove = favouriteRepositories.firstIndex(of: repoModel)ss {
+            if let indexToRemove = favouriteRepositories.firstIndex(of: repoModel) {
                 favouriteRepositories.remove(at: indexToRemove)
             }
             filteredFavouriteRepositories.remove(at: indexPathToRemove.row)
