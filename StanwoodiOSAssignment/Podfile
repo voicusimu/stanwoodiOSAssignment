@@ -3,6 +3,7 @@
 
 target 'StanwoodiOSAssignment' do
   pod 'Alamofire'
+  pod 'RealmSwift'
   pod 'Kingfisher'
   use_frameworks!
 
@@ -11,10 +12,19 @@ target 'StanwoodiOSAssignment' do
   target 'StanwoodiOSAssignmentTests' do
     inherit! :search_paths
     # Pods for testing
+  pod 'RealmSwift'
   end
 
   target 'StanwoodiOSAssignmentUITests' do
     # Pods for testing
+  pod 'RealmSwift'
   end
 
+post_install do |installer|
+     installer.pods_project.targets.each do |target|
+           target.build_configurations.each do |config|
+                 config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+           end
+     end
+ end
 end
