@@ -20,6 +20,7 @@ class RepositoriesViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var segmentedControlTopConstraint: NSLayoutConstraint!
 
     var repositories: [RepositoriesModel.RepoItem] = []
     var status: StatusType = .Loading
@@ -116,6 +117,14 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
             && status != .LoadingMore) {
             setupStatus(status: .LoadingMore)
             repositoriesPresenter.loadMoreRepositories(with: selectedIntervalType)
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView.contentOffset.y <= 0 {
+            self.segmentedControlTopConstraint.constant = 40 - self.tableView.contentOffset.y
+        } else {
+            self.segmentedControlTopConstraint.constant = 40
         }
     }
 
