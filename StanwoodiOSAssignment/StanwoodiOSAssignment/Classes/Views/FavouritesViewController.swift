@@ -14,6 +14,15 @@ class FavouritesViewController: UIViewController {
 
     private let favouritesPresenter = FavouritesPresenter()
     var favouriteRepositories: [RepoItemDBModel] = []
+    var filteredFavouriteRepositories: [RepoItemDBModel] = []
+    let searchController = UISearchController(searchResultsController: nil)
+
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +30,11 @@ class FavouritesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setupStatus(status: .Loading)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Favourites"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -33,15 +47,27 @@ class FavouritesViewController: UIViewController {
 
 extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, FavouritesViewDelegate, FavouriteDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if favouriteRepositories.count <= 0 {
-            setupStatus(status: .NoData)
+        var datasource: [RepoItemDBModel]
+        if isFiltering {
+            datasource = filteredFavouriteRepositories
+        } else {
+            datasource = favouriteRepositories
         }
-        return favouriteRepositories.count
+
+        datasource.count <= 0 ? setupStatus(status: .NoData) : setupStatus(status: .HasData)
+        
+        return datasource.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "baseInfoCell", for: indexPath) as? BaseInfoTableViewCell {
-            cell.setupWithModel(model: favouritesPresenter.repoModel(from: favouriteRepositories[indexPath.row]))
+            var repoModel: RepositoriesModel.RepoItem
+            if isFiltering {
+                repoModel = favouritesPresenter.repoModel(from: filteredFavouriteRepositories[indexPath.row])
+            } else {
+                repoModel = favouritesPresenter.repoModel(from: favouriteRepositories[indexPath.row])
+            }
+            cell.setupWithModel(model: repoModel)
             cell.favouriteDelegate = self
             return cell
         }
@@ -65,7 +91,16 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, 
         guard let indexPathToRemove = tableView.indexPath(for: cell) else {
             return
         }
-        favouriteRepositories.remove(at: indexPathToRemove.row)
+        if isFiltering {
+            let repoModel = filteredFavouriteRepositories[indexPathToRemove.row]
+            if let indexToRemove = favouriteRepositories.firstIndex(of: repoModel)ss {
+                favouriteRepositories.remove(at: indexToRemove)
+            }
+            filteredFavouriteRepositories.remove(at: indexPathToRemove.row)
+        } else {
+            favouriteRepositories.remove(at: indexPathToRemove.row)
+        }
+
         tableView.deleteRows(at: [indexPathToRemove], with: .automatic)
     }
 
@@ -76,6 +111,15 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, 
         }
         detailsViewController.detailsPresenter = presenter
     }
+}
+
+extension FavouritesViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    guard let searchText = searchController.searchBar.text else {
+        return
+    }
+    filterContentForSearchText(searchText)
+  }
 }
 
 //MARK: Helpers
@@ -99,5 +143,14 @@ extension FavouritesViewController {
         default:
             break
         }
+    }
+
+    func filterContentForSearchText(_ searchText: String) {
+        filteredFavouriteRepositories = favouriteRepositories.filter { (repo: RepoItemDBModel) -> Bool in
+            return (repo.name.lowercased().contains(searchText.lowercased()) ||
+                    repo.login.lowercased().contains(searchText.lowercased()))
+      }
+
+      tableView.reloadData()
     }
 }

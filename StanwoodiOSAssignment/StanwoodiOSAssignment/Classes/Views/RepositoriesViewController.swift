@@ -22,11 +22,19 @@ class RepositoriesViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var segmentedControlTopConstraint: NSLayoutConstraint!
 
+    private let repositoriesPresenter = RepositoriesPresenter(trendingRepositoriesService: TrendingRepositoriesService())
     var repositories: [RepositoriesModel.RepoItem] = []
+    var filteredRepositories: [RepositoriesModel.RepoItem] = []
     var status: StatusType = .Loading
     var selectedIntervalType: IntervalType = .LastDay
+    let searchController = UISearchController(searchResultsController: nil)
 
-    private let repositoriesPresenter = RepositoriesPresenter(trendingRepositoriesService: TrendingRepositoriesService())
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +43,11 @@ class RepositoriesViewController: UIViewController {
         repositoriesPresenter.setViewDelegate(trendingRepositoriesDelegate: self)
         repositoriesPresenter.showInitialRepositories(with: .LastDay)
         setupStatus(status: .Loading)
-        // Do any additional setup after loading the view.
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Repositories"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,12 +79,27 @@ class RepositoriesViewController: UIViewController {
 extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        var datasource: [RepositoriesModel.RepoItem]
+        if isFiltering {
+            datasource = filteredRepositories
+        } else {
+            datasource = repositories
+        }
+        if datasource.count <= 0 {
+            setupStatus(status: .NoData)
+        }
+        return datasource.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "baseInfoCell", for: indexPath) as? BaseInfoTableViewCell {
-            cell.setupWithModel(model: repositories[indexPath.row])
+            let repoModel: RepositoriesModel.RepoItem
+            if isFiltering {
+                repoModel = filteredRepositories[indexPath.row]
+            } else {
+                repoModel = repositories[indexPath.row]
+            }
+            cell.setupWithModel(model: repoModel)
             return cell
         }
 
@@ -84,7 +111,7 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
             return
         }
         let lastElement = repositories.count - 10
-        if  (indexPath.row == lastElement && status != .LoadingMore) {
+        if  (indexPath.row == lastElement && status != .LoadingMore && !isFiltering) {
             setupStatus(status: .LoadingMore)
             repositoriesPresenter.loadMoreRepositories(with: selectedIntervalType)
         }
@@ -113,8 +140,9 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
     }
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height - 1)
-            && status != .LoadingMore) {
+        if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height - 1) &&
+                status != .LoadingMore &&
+                !isFiltering) {
             setupStatus(status: .LoadingMore)
             repositoriesPresenter.loadMoreRepositories(with: selectedIntervalType)
         }
@@ -135,6 +163,15 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
         }
         detailsViewController.detailsPresenter = presenter
     }
+}
+
+extension RepositoriesViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    guard let searchText = searchController.searchBar.text else {
+        return
+    }
+    filterContentForSearchText(searchText)
+  }
 }
 
     //MARK: Helpers
@@ -169,5 +206,13 @@ extension RepositoriesViewController {
             tableView.isHidden = false
             break
         }
+    }
+
+    func filterContentForSearchText(_ searchText: String) {
+        filteredRepositories = repositories.filter { (repo: RepositoriesModel.RepoItem) -> Bool in
+            return (repo.name.lowercased().contains(searchText.lowercased()) ||
+                    repo.owner.login.lowercased().contains(searchText.lowercased()))
+        }
+        tableView.reloadData()
     }
 }
