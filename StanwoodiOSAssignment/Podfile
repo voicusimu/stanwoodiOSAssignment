@@ -3,6 +3,7 @@
 
 target 'StanwoodiOSAssignment' do
   pod 'Alamofire'
+  pod 'Kingfisher'
   use_frameworks!
 
   # Pods for StanwoodiOSAssignment

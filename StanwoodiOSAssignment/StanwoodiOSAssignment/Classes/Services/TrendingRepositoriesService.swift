@@ -38,6 +38,7 @@ class TrendingRepositoriesService {
                         callBack([])
                         return
                     }
+                    debugPrint(response)
                     do {
                         let responseModel = try JSONDecoder().decode(RepositoriesModel.self, from: data)
                         callBack(responseModel.items)
@@ -55,15 +56,13 @@ class TrendingRepositoriesService {
 
         switch interval {
         case .LastDay:
-            debugPrint(dateFormatter.string(from: date))
-            return dateFormatter.string(from: date)
+            let oneDayAgo = Calendar.current.date(byAdding: .day, value: -1, to: date)
+            return dateFormatter.string(from: oneDayAgo ?? Date())
         case .LastWeek:
             let oneWeekAgo = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: date)
-            debugPrint(dateFormatter.string(from: oneWeekAgo ?? Date()))
             return dateFormatter.string(from: oneWeekAgo ?? Date())
         case .LastMonth:
             let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: date)
-            debugPrint(dateFormatter.string(from: oneMonthAgo ?? Date()))
             return dateFormatter.string(from: oneMonthAgo ?? Date())
         }
     }

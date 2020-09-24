@@ -13,10 +13,10 @@ struct RepositoriesModel: Codable {
     struct RepoItem:Codable {
         let id: Int
         let name: String
-        let description: String
+        let description: String?
         let owner: Owner
         let stargazersCount: Int
-        let language: String
+        let language: String?
         let forks: Int
         let createdAt: String
         let htmlUrl: String
@@ -25,17 +25,17 @@ struct RepositoriesModel: Codable {
             case id,
                  name,
                  description,
-                 owner,
+                 owner = "owner",
                  stargazersCount = "stargazers_count",
                  language,
                  forks,
-                 createdAt = "create_at",
+                 createdAt = "created_at",
                  htmlUrl = "html_url"
         }
         
         struct Owner: Codable {
             let login: String
-            let avatarUrl: String
+            let avatarUrl: String?
 
             private enum CodingKeys: String, CodingKey {
                 case login,
