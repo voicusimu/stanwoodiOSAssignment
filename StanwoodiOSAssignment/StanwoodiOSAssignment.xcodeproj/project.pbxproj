@@ -28,6 +28,7 @@
 		B4A5661A251CF9B0001DD736 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A56619251CF9B0001DD736 /* UITableView+Extension.swift */; };
 		B4A5661F251D0708001DD736 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A5661E251D0708001DD736 /* DetailsViewController.swift */; };
 		B4A56624251D0998001DD736 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A56623251D0998001DD736 /* DetailsPresenter.swift */; };
+		B4A5664A251D1EA4001DD736 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A56649251D1EA4001DD736 /* MainSplitViewController.swift */; };
 		CB3C5DCBB13E944C81428A57 /* Pods_StanwoodiOSAssignment_StanwoodiOSAssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44150E58379CD1DDCDDF9E79 /* Pods_StanwoodiOSAssignment_StanwoodiOSAssignmentUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		B4A56619251CF9B0001DD736 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		B4A5661E251D0708001DD736 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B4A56623251D0998001DD736 /* DetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		B4A56649251D1EA4001DD736 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		CA5F28DE57B9B65D60C0EAD1 /* Pods_StanwoodiOSAssignmentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StanwoodiOSAssignmentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A60BEEF6E509AD52372EBB /* Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig"; path = "Target Support Files/Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests/Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +209,7 @@
 				B4A5655A251BD0FE001DD736 /* RepositoriesViewController.swift */,
 				B4A5661E251D0708001DD736 /* DetailsViewController.swift */,
 				B4A56596251CA3B0001DD736 /* FavouritesViewController.swift */,
+				B4A56649251D1EA4001DD736 /* MainSplitViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				B4A565CB251CAE16001DD736 /* DatabaseManager.swift in Sources */,
 				B4A56624251D0998001DD736 /* DetailsPresenter.swift in Sources */,
 				B4A5655E251BD0FE001DD736 /* RepositoriesViewController.swift in Sources */,
+				B4A5664A251D1EA4001DD736 /* MainSplitViewController.swift in Sources */,
 				B4A5652C251B805A001DD736 /* BaseInfoTableViewCell.swift in Sources */,
 				B4A564EF251B5485001DD736 /* AppDelegate.swift in Sources */,
 				B4A56570251BDFA9001DD736 /* RepositoriesModel.swift in Sources */,

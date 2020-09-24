@@ -158,12 +158,12 @@
                         <outlet property="segmentedControl" destination="5FW-aF-5jk" id="1KT-XW-TvT"/>
                         <outlet property="statusLabel" destination="u1d-xI-iSK" id="TmN-l1-Y6N"/>
                         <outlet property="tableView" destination="MKT-ts-WLh" id="93p-Nf-ULk"/>
-                        <segue destination="9AG-So-tRn" kind="show" identifier="showDetails" id="AZU-xm-bzU"/>
+                        <segue destination="9AG-So-tRn" kind="showDetail" identifier="showDetails" id="MLr-24-U87"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aK-qC-9lh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630.43478260869574" y="-311.38392857142856"/>
+            <point key="canvasLocation" x="1987" y="-836"/>
         </scene>
         <!--Details-->
         <scene sceneID="Bbm-QO-EyU">
@@ -174,13 +174,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMF-Yo-5iM">
-                                <rect key="frame" x="25" y="170" width="364" height="26.5"/>
+                                <rect key="frame" x="25" y="118" width="364" height="26.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="command" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XFb-CU-HKT">
-                                <rect key="frame" x="25" y="227.5" width="36" height="34"/>
+                                <rect key="frame" x="25" y="175.5" width="36" height="34"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="c6Z-gF-X8Q"/>
@@ -188,20 +188,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLM-0Y-Jb0">
-                                <rect key="frame" x="81" y="234.5" width="323" height="20.5"/>
+                                <rect key="frame" x="81" y="182.5" width="323" height="20.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Isx-eg-mzC">
-                                <rect key="frame" x="81" y="270" width="323" height="1"/>
+                                <rect key="frame" x="81" y="218" width="323" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="hYQ-Yf-xYZ"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GitFork" translatesAutoresizingMaskIntoConstraints="NO" id="Af2-CB-fTB">
-                                <rect key="frame" x="25" y="287.5" width="36" height="36"/>
+                                <rect key="frame" x="25" y="235.5" width="36" height="36"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="Oiw-C8-F8E"/>
@@ -209,20 +209,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3At-4Z-3fa">
-                                <rect key="frame" x="81" y="295.5" width="323" height="20.5"/>
+                                <rect key="frame" x="81" y="243.5" width="323" height="20.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Isb-Xm-Heq">
-                                <rect key="frame" x="81" y="331" width="323" height="1"/>
+                                <rect key="frame" x="81" y="279" width="323" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="vnk-aT-Mvl"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="SxF-pa-NU9">
-                                <rect key="frame" x="25" y="348" width="36" height="36"/>
+                                <rect key="frame" x="25" y="296" width="36" height="36"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="ILV-ex-b1f"/>
@@ -230,20 +230,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esf-Df-2ND">
-                                <rect key="frame" x="81" y="356.5" width="323" height="20.5"/>
+                                <rect key="frame" x="81" y="304.5" width="323" height="20.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qf-dv-d2G">
-                                <rect key="frame" x="81" y="392" width="323" height="1"/>
+                                <rect key="frame" x="81" y="340" width="323" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="TdN-mj-hPa"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MGf-Za-2WT">
-                                <rect key="frame" x="25" y="410" width="36" height="35"/>
+                                <rect key="frame" x="25" y="358" width="36" height="35"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="XuH-et-pJw"/>
@@ -251,20 +251,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created at" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STt-DC-xsL">
-                                <rect key="frame" x="81" y="417.5" width="323" height="20.5"/>
+                                <rect key="frame" x="81" y="365.5" width="323" height="20.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhh-cc-kPA">
-                                <rect key="frame" x="81" y="453" width="323" height="1"/>
+                                <rect key="frame" x="81" y="401" width="323" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="bge-Fb-WYn"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zD7-L7-lm5">
-                                <rect key="frame" x="123" y="504" width="168" height="50"/>
+                                <rect key="frame" x="123" y="452" width="168" height="50"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7zk-z9-MGp"/>
@@ -332,7 +332,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gK-l2-z5W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644.9275362318842" y="-29.464285714285712"/>
+            <point key="canvasLocation" x="1987" y="-142"/>
+        </scene>
+        <!--Favourites-->
+        <scene sceneID="crc-Z0-lFp">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" id="myY-bM-8Sq" customClass="MainSplitViewController" customModule="StanwoodiOSAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favourites" image="bookmark" catalog="system" id="BaX-hL-RAw"/>
+                    <connections>
+                        <segue destination="CQR-0N-vAs" kind="relationship" relationship="masterViewController" id="PpT-59-c9W"/>
+                        <segue destination="9AG-So-tRn" kind="relationship" relationship="detailViewController" id="FXg-NN-eqo"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RZk-is-hwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-371" y="446"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WS0-2a-Yyz">
+            <objects>
+                <navigationController id="WfT-2V-Bx1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E30-cE-uoG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="T7i-NH-8SW" kind="relationship" relationship="rootViewController" id="aRE-zE-f7w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uUE-dJ-w8y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1128" y="-836"/>
+        </scene>
+        <!--Repositories-->
+        <scene sceneID="BhQ-xQ-KbP">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" id="pEI-tl-Bkz" customClass="MainSplitViewController" customModule="StanwoodiOSAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Repositories" image="square.stack.3d.up" catalog="system" id="RF7-Ef-IAX"/>
+                    <connections>
+                        <segue destination="WfT-2V-Bx1" kind="relationship" relationship="masterViewController" id="YOy-eB-DCP"/>
+                        <segue destination="9AG-So-tRn" kind="relationship" relationship="detailViewController" id="2Q7-h3-ODe"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="00O-eK-cdS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-370" y="-447"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="iJn-6a-agR">
@@ -345,8 +389,8 @@
                         <color key="selectedImageTintColor" systemColor="systemPinkColor"/>
                     </tabBar>
                     <connections>
-                        <segue destination="jEA-Nj-MeU" kind="relationship" relationship="viewControllers" id="lrj-0X-KHc"/>
-                        <segue destination="CQR-0N-vAs" kind="relationship" relationship="viewControllers" id="AY7-Td-Lcy"/>
+                        <segue destination="pEI-tl-Bkz" kind="relationship" relationship="viewControllers" id="cW6-HK-hr1"/>
+                        <segue destination="myY-bM-8Sq" kind="relationship" relationship="viewControllers" id="fg1-10-jm2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXY-63-RgV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -362,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H8Y-eD-BBI">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="baseInfoCell" id="610-0p-GzO" customClass="BaseInfoTableViewCell" customModule="StanwoodiOSAssignment" customModuleProvider="target">
@@ -454,11 +498,11 @@
                                 </prototypes>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="uJR-2B-LxE">
-                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="458" width="37" height="37"/>
                                 <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-G8-sOP">
-                                <rect key="frame" x="155.5" y="479" width="103" height="29"/>
+                                <rect key="frame" x="155.5" y="505" width="103" height="29"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="24"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -482,12 +526,12 @@
                         <outlet property="activityIndicator" destination="uJR-2B-LxE" id="sNz-CF-9q0"/>
                         <outlet property="statusLabel" destination="VWn-G8-sOP" id="Uxo-gk-dfS"/>
                         <outlet property="tableView" destination="H8Y-eD-BBI" id="H4z-Jl-zvK"/>
-                        <segue destination="9AG-So-tRn" kind="show" identifier="showDetails" id="WmN-1u-Lq8"/>
+                        <segue destination="9AG-So-tRn" kind="showDetail" identifier="showDetails" id="WmN-1u-Lq8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yiv-W6-lQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="354"/>
+            <point key="canvasLocation" x="1987" y="898"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="RuK-gA-P0U">
@@ -509,39 +553,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYg-ac-VDa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-245" y="354"/>
-        </scene>
-        <!--Repositories-->
-        <scene sceneID="feu-qW-cDH">
-            <objects>
-                <navigationController title="Repositories" automaticallyAdjustsScrollViewInsets="NO" id="jEA-Nj-MeU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Repositories" image="square.stack.3d.up" catalog="system" id="0XI-ye-t0r"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="AF5-26-Pev">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="37"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X9Q-3R-dRp">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="T7i-NH-8SW" kind="relationship" relationship="rootViewController" id="qbI-9V-b0a"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="99z-Ms-ejX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-264" y="-311"/>
+            <point key="canvasLocation" x="1010" y="898"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WmN-1u-Lq8"/>
+        <segue reference="FXg-NN-eqo"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GitFork" width="185" height="185"/>
