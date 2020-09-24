@@ -49,6 +49,12 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, 
         return UITableViewCell()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repositoryModel = favouritesPresenter.repoModel(from: favouriteRepositories[indexPath.row])
+        let detailsPresenter = DetailsPresenter.init(trendingRepositoryModel: repositoryModel)
+        self.performSegue(withIdentifier: "showDetails", sender: detailsPresenter)
+    }
+
     func displayFavouritesRepositories(repositories: [RepoItemDBModel]) {
         self.favouriteRepositories = repositories
         setupStatus(status: repositories.count > 0 ? .HasData : .NoData)
@@ -61,6 +67,14 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource, 
         }
         favouriteRepositories.remove(at: indexPathToRemove.row)
         tableView.deleteRows(at: [indexPathToRemove], with: .automatic)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let presenter = sender as? DetailsPresenter,
+              let detailsViewController = segue.destination as? DetailsViewController else {
+            return
+        }
+        detailsViewController.detailsPresenter = presenter
     }
 }
 
@@ -82,6 +96,8 @@ extension FavouritesViewController {
             activityIndicator.stopAnimating()
             statusLabel.isHidden = true
             tableView.isHidden = false
+        default:
+            break
         }
     }
 }

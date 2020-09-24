@@ -25,6 +25,9 @@
 		B4A5659C251CA3BC001DD736 /* FavouritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A5659B251CA3BC001DD736 /* FavouritesPresenter.swift */; };
 		B4A565CB251CAE16001DD736 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A565CA251CAE16001DD736 /* DatabaseManager.swift */; };
 		B4A565FC251CB227001DD736 /* RepoItemDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A565FB251CB227001DD736 /* RepoItemDBModel.swift */; };
+		B4A5661A251CF9B0001DD736 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A56619251CF9B0001DD736 /* UITableView+Extension.swift */; };
+		B4A5661F251D0708001DD736 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A5661E251D0708001DD736 /* DetailsViewController.swift */; };
+		B4A56624251D0998001DD736 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A56623251D0998001DD736 /* DetailsPresenter.swift */; };
 		CB3C5DCBB13E944C81428A57 /* Pods_StanwoodiOSAssignment_StanwoodiOSAssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44150E58379CD1DDCDDF9E79 /* Pods_StanwoodiOSAssignment_StanwoodiOSAssignmentUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +78,9 @@
 		B4A5659B251CA3BC001DD736 /* FavouritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesPresenter.swift; sourceTree = "<group>"; };
 		B4A565CA251CAE16001DD736 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		B4A565FB251CB227001DD736 /* RepoItemDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemDBModel.swift; sourceTree = "<group>"; };
+		B4A56619251CF9B0001DD736 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		B4A5661E251D0708001DD736 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		B4A56623251D0998001DD736 /* DetailsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		CA5F28DE57B9B65D60C0EAD1 /* Pods_StanwoodiOSAssignmentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StanwoodiOSAssignmentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A60BEEF6E509AD52372EBB /* Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig"; path = "Target Support Files/Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests/Pods-StanwoodiOSAssignment-StanwoodiOSAssignmentUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +187,7 @@
 				B4A56559251BD0FE001DD736 /* Views */,
 				B4A5655B251BD0FE001DD736 /* Presenters */,
 				B4A5655C251BD0FE001DD736 /* Services */,
+				B4A56600251CD181001DD736 /* Extensions */,
 				B4A5652A251B801C001DD736 /* CustomViews */,
 			);
 			path = Classes;
@@ -198,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B4A5655A251BD0FE001DD736 /* RepositoriesViewController.swift */,
+				B4A5661E251D0708001DD736 /* DetailsViewController.swift */,
 				B4A56596251CA3B0001DD736 /* FavouritesViewController.swift */,
 			);
 			path = Views;
@@ -208,6 +216,7 @@
 			children = (
 				B4A56583251BF402001DD736 /* RepositoriesPresenter.swift */,
 				B4A5659B251CA3BC001DD736 /* FavouritesPresenter.swift */,
+				B4A56623251D0998001DD736 /* DetailsPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -228,6 +237,14 @@
 				B4A565FB251CB227001DD736 /* RepoItemDBModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B4A56600251CD181001DD736 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B4A56619251CF9B0001DD736 /* UITableView+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BBBD76ABE6222430FCF9C176 /* Frameworks */ = {
@@ -499,6 +516,7 @@
 				B4A56597251CA3B0001DD736 /* FavouritesViewController.swift in Sources */,
 				B4A56584251BF402001DD736 /* RepositoriesPresenter.swift in Sources */,
 				B4A565CB251CAE16001DD736 /* DatabaseManager.swift in Sources */,
+				B4A56624251D0998001DD736 /* DetailsPresenter.swift in Sources */,
 				B4A5655E251BD0FE001DD736 /* RepositoriesViewController.swift in Sources */,
 				B4A5652C251B805A001DD736 /* BaseInfoTableViewCell.swift in Sources */,
 				B4A564EF251B5485001DD736 /* AppDelegate.swift in Sources */,
@@ -507,6 +525,8 @@
 				B4A56552251B8893001DD736 /* SceneDelegate.swift in Sources */,
 				B4A5659C251CA3BC001DD736 /* FavouritesPresenter.swift in Sources */,
 				B4A565FC251CB227001DD736 /* RepoItemDBModel.swift in Sources */,
+				B4A5661F251D0708001DD736 /* DetailsViewController.swift in Sources */,
+				B4A5661A251CF9B0001DD736 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

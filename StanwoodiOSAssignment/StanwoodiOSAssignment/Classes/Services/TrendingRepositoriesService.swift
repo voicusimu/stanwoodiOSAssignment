@@ -19,7 +19,7 @@ class TrendingRepositoriesService {
                                  interval: IntervalType = .LastDay,
                                  ascending: Bool? = false,
                                  page: Int? = 1,
-                                 callBack: @escaping ([RepositoriesModel.RepoItem]) -> Void) {
+                                 callBack: @escaping ([RepositoriesModel.RepoItem], Bool) -> Void) {
 
         let headers: HTTPHeaders = [.accept("application/json")]
 
@@ -35,15 +35,15 @@ class TrendingRepositoriesService {
                    parameters: parameters,
                    headers: headers).response { response in
                     guard let data = response.data else {
-                        callBack([])
+                        callBack([], response.response?.statusCode != 200)
                         return
                     }
                     debugPrint(response)
                     do {
                         let responseModel = try JSONDecoder().decode(RepositoriesModel.self, from: data)
-                        callBack(responseModel.items)
+                        callBack(responseModel.items, false)
                     } catch(_) {
-                        callBack([])
+                        callBack([], true)
                     }
                    }
     }

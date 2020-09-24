@@ -16,6 +16,7 @@ class BaseInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarThumbnail: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
 
     private var repoModel: RepositoriesModel.RepoItem?
@@ -42,6 +43,7 @@ class BaseInfoTableViewCell: UITableViewCell {
         repoModel = model
         userNameLabel.text = "\(model.owner.login)/\(model.name)"
         descriptionLabel.text = model.description
+        starsLabel.text = "\(model.stargazersCount)\(NSLocalizedString(" Stars", comment: ""))"
         if let avatarURL = model.owner.avatarUrl {
             avatarThumbnail.kf.setImage(with: URL.init(string: avatarURL))
         }
