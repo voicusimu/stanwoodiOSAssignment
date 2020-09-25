@@ -17,7 +17,7 @@ enum StatusType {
 }
 
 class RepositoriesViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -42,8 +42,8 @@ class RepositoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         repositoriesPresenter.setViewDelegate(trendingRepositoriesDelegate: self)
         setupStatus(status: .Loading)
         searchController.searchResultsUpdater = self
@@ -61,7 +61,7 @@ class RepositoriesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 
     @IBAction func didChangeSegmentedControl(_ sender: UISegmentedControl) {
@@ -91,9 +91,8 @@ class RepositoriesViewController: UIViewController {
 
 //MARK: Delegates
 
-extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension RepositoriesViewController: RepositoriesViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var datasource: [RepositoriesModel.RepoItem]
         if isFiltering {
             datasource = filteredRepositories
@@ -106,8 +105,8 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
         return datasource.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "baseInfoCell", for: indexPath) as? BaseInfoTableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "baseInfoCollectionViewCell", for: indexPath) as? BaseInfoCollectionViewCell {
             let repoModel: RepositoriesModel.RepoItem
             if isFiltering {
                 repoModel = filteredRepositories[indexPath.row]
@@ -115,13 +114,23 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
                 repoModel = repositories[indexPath.row]
             }
             cell.setupWithModel(model: repoModel)
+
             return cell
         }
 
-        return UITableViewCell()
+        return UICollectionViewCell()
     }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 110)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsPresenter = DetailsPresenter.init(trendingRepositoryModel: repositories[indexPath.row])
+        self.performSegue(withIdentifier: "showDetails", sender: detailsPresenter)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard repositories.count > 10 else {
             return
         }
@@ -132,11 +141,6 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailsPresenter = DetailsPresenter.init(trendingRepositoryModel: repositories[indexPath.row])
-        self.performSegue(withIdentifier: "showDetails", sender: detailsPresenter)
-    }
-
     func didLoadInitialRepositories(repositories: [RepositoriesModel.RepoItem], hasError: Bool) {
         self.repositories = repositories
         if hasError {
@@ -144,7 +148,7 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
         } else {
             setupStatus(status: repositories.count > 0 ? .HasData : .NoData)
         }
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 
     func didLoadMoreRepositories(repositories: [RepositoriesModel.RepoItem], hasError: Bool) {
@@ -153,25 +157,17 @@ extension RepositoriesViewController: RepositoriesViewDelegate, UITableViewDeleg
         } else {
             self.repositories.append(contentsOf: repositories)
             setupStatus(status: .HasData)
-            tableView.reloadData()
+            collectionView.reloadData()
         }
-        tableView.hideLoadingMoreIndicator()
+//        collectionView.hideLoadingMoreIndicator()
     }
 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height - 1) &&
+        if (self.collectionView.contentOffset.y >= (self.collectionView.contentSize.height - self.collectionView.bounds.size.height - 1) &&
                 status != .LoadingMore &&
                 !isFiltering) {
             setupStatus(status: .LoadingMore)
             repositoriesPresenter.loadMoreRepositories(with: selectedIntervalType)
-        }
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.tableView.contentOffset.y <= 0 {
-            self.segmentedControlTopConstraint.constant = 40 - self.tableView.contentOffset.y
-        } else {
-            self.segmentedControlTopConstraint.constant = 40
         }
     }
 
@@ -201,26 +197,26 @@ extension RepositoriesViewController {
         case .Loading:
             activityIndicator.startAnimating()
             statusLabel.isHidden = false
-            tableView.isHidden = true
+            collectionView.isHidden = true
             statusLabel.text = NSLocalizedString("Loading...", comment: "")
         case .NoData:
             activityIndicator.stopAnimating()
             statusLabel.isHidden = false
-            tableView.isHidden = true
+            collectionView.isHidden = true
             statusLabel.text = NSLocalizedString("No data", comment: "")
         case .HasData:
             activityIndicator.stopAnimating()
             statusLabel.isHidden = true
-            tableView.isHidden = false
+            collectionView.isHidden = false
         case .LoadingMore:
-            tableView.showLoadingMoreIndicator(IndexPath(row: repositories.count, section: 0), closure: {})
+//            collectionView.showLoadingMoreIndicator(IndexPath(row: repositories.count, section: 0), closure: {})
             statusLabel.isHidden = true
-            tableView.isHidden = false
+            collectionView.isHidden = false
         case .Error:
             presentOKAlert(title: "Error", message: NSLocalizedString("An error has occured.\nProbably unauthenticated request limit reached", comment: ""))
             activityIndicator.stopAnimating()
             statusLabel.isHidden = true
-            tableView.isHidden = false
+            collectionView.isHidden = false
             break
         }
     }
@@ -237,6 +233,6 @@ extension RepositoriesViewController {
             return (repo.name.lowercased().contains(searchText.lowercased()) ||
                     repo.owner.login.lowercased().contains(searchText.lowercased()))
         }
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 }
